@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rl.ecps.dao.EbSkuMapper" >
+ <resultMap id="BaseResultMap" type="com.rl.ecps.model.EbSku" >
+    <id column="SKU_ID" property="skuId" jdbcType="DECIMAL" />
+    <result column="ITEM_ID" property="itemId" jdbcType="DECIMAL" />
+    <result column="SKU" property="sku" jdbcType="VARCHAR" />
+    <result column="SKU_PRICE" property="skuPrice" jdbcType="DECIMAL" />
+    <result column="SHOW_STATUS" property="showStatus" jdbcType="DECIMAL" />
+    <result column="STOCK_INVENTORY" property="stockInventory" jdbcType="DECIMAL" />
+    <result column="SKU_UPPER_LIMIT" property="skuUpperLimit" jdbcType="DECIMAL" />
+    <result column="LOCATION" property="location" jdbcType="VARCHAR" />
+    <result column="SKU_IMG" property="skuImg" jdbcType="VARCHAR" />
+    <result column="SKU_SORT" property="skuSort" jdbcType="DECIMAL" />
+    <result column="SKU_NAME" property="skuName" jdbcType="VARCHAR" />
+    <result column="MARKET_PRICE" property="marketPrice" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="DECIMAL" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="DECIMAL" />
+    <result column="ORIGINAL_SKU_ID" property="originalSkuId" jdbcType="DECIMAL" />
+    <result column="LAST_STATUS" property="lastStatus" jdbcType="DECIMAL" />
+    <result column="MERCHANT_ID" property="merchantId" jdbcType="DECIMAL" />
+    <result column="SKU_TYPE" property="skuType" jdbcType="DECIMAL" />
+    <result column="SALES" property="sales" jdbcType="DECIMAL" />
+    <result column="RES_CODE" property="resCode" jdbcType="VARCHAR" />
+    <result column="PACK_ID" property="packId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SKU_ID, ITEM_ID, SKU, SKU_PRICE, SHOW_STATUS, STOCK_INVENTORY, SKU_UPPER_LIMIT, LOCATION, 
+    SKU_IMG, SKU_SORT, SKU_NAME, MARKET_PRICE, CREATE_TIME, UPDATE_TIME, CREATE_USER_ID, 
+    UPDATE_USER_ID, ORIGINAL_SKU_ID, LAST_STATUS, MERCHANT_ID, SKU_TYPE, SALES, RES_CODE, 
+    PACK_ID
+  </sql>
+  
+  
+  <insert id="insert" parameterType="com.rl.ecps.model.EbSku" >
+    <selectKey keyProperty="skuId" order="BEFORE" resultType="long">
+      select EB_SKU_SEQ.nextval from dual
+    </selectKey>
+    insert into EB_SKU (SKU_ID, ITEM_ID, SKU, 
+      SKU_PRICE, SHOW_STATUS, STOCK_INVENTORY, 
+      SKU_UPPER_LIMIT, LOCATION, SKU_IMG, 
+      SKU_SORT, SKU_NAME, MARKET_PRICE, 
+      CREATE_TIME, UPDATE_TIME, CREATE_USER_ID, 
+      UPDATE_USER_ID, ORIGINAL_SKU_ID, LAST_STATUS, 
+      MERCHANT_ID, SKU_TYPE, SALES, 
+      RES_CODE, PACK_ID)
+    values (#{skuId,jdbcType=DECIMAL}, #{itemId,jdbcType=DECIMAL}, #{sku,jdbcType=VARCHAR}, 
+      #{skuPrice,jdbcType=DECIMAL}, #{showStatus,jdbcType=DECIMAL}, #{stockInventory,jdbcType=DECIMAL}, 
+      #{skuUpperLimit,jdbcType=DECIMAL}, #{location,jdbcType=VARCHAR}, #{skuImg,jdbcType=VARCHAR}, 
+      #{skuSort,jdbcType=DECIMAL}, #{skuName,jdbcType=VARCHAR}, #{marketPrice,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=DECIMAL}, 
+      #{updateUserId,jdbcType=DECIMAL}, #{originalSkuId,jdbcType=DECIMAL}, #{lastStatus,jdbcType=DECIMAL}, 
+      #{merchantId,jdbcType=DECIMAL}, #{skuType,jdbcType=DECIMAL}, #{sales,jdbcType=DECIMAL}, 
+      #{resCode,jdbcType=VARCHAR}, #{packId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.ecps.model.EbSku" >
+    insert into EB_SKU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="itemId != null" >
+        ITEM_ID,
+      </if>
+      <if test="sku != null" >
+        SKU,
+      </if>
+      <if test="skuPrice != null" >
+        SKU_PRICE,
+      </if>
+      <if test="showStatus != null" >
+        SHOW_STATUS,
+      </if>
+      <if test="stockInventory != null" >
+        STOCK_INVENTORY,
+      </if>
+      <if test="skuUpperLimit != null" >
+        SKU_UPPER_LIMIT,
+      </if>
+      <if test="location != null" >
+        LOCATION,
+      </if>
+      <if test="skuImg != null" >
+        SKU_IMG,
+      </if>
+      <if test="skuSort != null" >
+        SKU_SORT,
+      </if>
+      <if test="skuName != null" >
+        SKU_NAME,
+      </if>
+      <if test="marketPrice != null" >
+        MARKET_PRICE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="originalSkuId != null" >
+        ORIGINAL_SKU_ID,
+      </if>
+      <if test="lastStatus != null" >
+        LAST_STATUS,
+      </if>
+      <if test="merchantId != null" >
+        MERCHANT_ID,
+      </if>
+      <if test="skuType != null" >
+        SKU_TYPE,
+      </if>
+      <if test="sales != null" >
+        SALES,
+      </if>
+      <if test="resCode != null" >
+        RES_CODE,
+      </if>
+      <if test="packId != null" >
+        PACK_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="skuId != null" >
+        #{skuId,jdbcType=DECIMAL},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=DECIMAL},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null" >
+        #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="showStatus != null" >
+        #{showStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="stockInventory != null" >
+        #{stockInventory,jdbcType=DECIMAL},
+      </if>
+      <if test="skuUpperLimit != null" >
+        #{skuUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="skuImg != null" >
+        #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSort != null" >
+        #{skuSort,jdbcType=DECIMAL},
+      </if>
+      <if test="skuName != null" >
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="originalSkuId != null" >
+        #{originalSkuId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastStatus != null" >
+        #{lastStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=DECIMAL},
+      </if>
+      <if test="skuType != null" >
+        #{skuType,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=DECIMAL},
+      </if>
+      <if test="resCode != null" >
+        #{resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packId != null" >
+        #{packId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update EB_SKU
+    <set >
+      <if test="record.skuId != null" >
+        SKU_ID = #{record.skuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.itemId != null" >
+        ITEM_ID = #{record.itemId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sku != null" >
+        SKU = #{record.sku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuPrice != null" >
+        SKU_PRICE = #{record.skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.showStatus != null" >
+        SHOW_STATUS = #{record.showStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stockInventory != null" >
+        STOCK_INVENTORY = #{record.stockInventory,jdbcType=DECIMAL},
+      </if>
+      <if test="record.skuUpperLimit != null" >
+        SKU_UPPER_LIMIT = #{record.skuUpperLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.location != null" >
+        LOCATION = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuImg != null" >
+        SKU_IMG = #{record.skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuSort != null" >
+        SKU_SORT = #{record.skuSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.skuName != null" >
+        SKU_NAME = #{record.skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketPrice != null" >
+        MARKET_PRICE = #{record.marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateUserId != null" >
+        UPDATE_USER_ID = #{record.updateUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.originalSkuId != null" >
+        ORIGINAL_SKU_ID = #{record.originalSkuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastStatus != null" >
+        LAST_STATUS = #{record.lastStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.merchantId != null" >
+        MERCHANT_ID = #{record.merchantId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.skuType != null" >
+        SKU_TYPE = #{record.skuType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sales != null" >
+        SALES = #{record.sales,jdbcType=DECIMAL},
+      </if>
+      <if test="record.resCode != null" >
+        RES_CODE = #{record.resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packId != null" >
+        PACK_ID = #{record.packId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update EB_SKU
+    set SKU_ID = #{record.skuId,jdbcType=DECIMAL},
+      ITEM_ID = #{record.itemId,jdbcType=DECIMAL},
+      SKU = #{record.sku,jdbcType=VARCHAR},
+      SKU_PRICE = #{record.skuPrice,jdbcType=DECIMAL},
+      SHOW_STATUS = #{record.showStatus,jdbcType=DECIMAL},
+      STOCK_INVENTORY = #{record.stockInventory,jdbcType=DECIMAL},
+      SKU_UPPER_LIMIT = #{record.skuUpperLimit,jdbcType=DECIMAL},
+      LOCATION = #{record.location,jdbcType=VARCHAR},
+      SKU_IMG = #{record.skuImg,jdbcType=VARCHAR},
+      SKU_SORT = #{record.skuSort,jdbcType=DECIMAL},
+      SKU_NAME = #{record.skuName,jdbcType=VARCHAR},
+      MARKET_PRICE = #{record.marketPrice,jdbcType=DECIMAL},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=DECIMAL},
+      UPDATE_USER_ID = #{record.updateUserId,jdbcType=DECIMAL},
+      ORIGINAL_SKU_ID = #{record.originalSkuId,jdbcType=DECIMAL},
+      LAST_STATUS = #{record.lastStatus,jdbcType=DECIMAL},
+      MERCHANT_ID = #{record.merchantId,jdbcType=DECIMAL},
+      SKU_TYPE = #{record.skuType,jdbcType=DECIMAL},
+      SALES = #{record.sales,jdbcType=DECIMAL},
+      RES_CODE = #{record.resCode,jdbcType=VARCHAR},
+      PACK_ID = #{record.packId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  select SKU_ID, ITEM_ID, SKU, 
+      SKU_PRICE, SHOW_STATUS, STOCK_INVENTORY, 
+      SKU_UPPER_LIMIT, LOCATION, SKU_IMG, 
+      SKU_SORT, SKU_NAME, MARKET_PRICE, 
+      CREATE_TIME, UPDATE_TIME, CREATE_USER_ID, 
+      UPDATE_USER_ID, ORIGINAL_SKU_ID, LAST_STATUS, 
+      MERCHANT_ID, SKU_TYPE, SALES, 
+      RES_CODE, PACK_ID from EB_SKU 
+      where SKU_ID = #{skuId,jdbcType=DECIMAL}
+   </select>
+   
+   <resultMap type="com.rl.ecps.model.EbSku" id="getSkuDetailByIdRM" extends="BaseResultMap">
+    <association property="item" javaType="com.rl.ecps.model.EbItem">
+    <id column="ITEM_ID" property="itemId" jdbcType="DECIMAL" />
+    <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR" />
+    <result column="ITEM_NO" property="itemNo" jdbcType="VARCHAR" />
+    <result column="BRAND_ID" property="brandId" jdbcType="DECIMAL" />
+    <result column="CAT_ID" property="catId" jdbcType="DECIMAL" />
+    <result column="TAG_IMG_ID" property="tagImgId" jdbcType="DECIMAL" />
+    <result column="IS_NEW" property="isNew" jdbcType="DECIMAL" />
+    <result column="IS_GOOD" property="isGood" jdbcType="DECIMAL" />
+    <result column="IS_HOT" property="isHot" jdbcType="DECIMAL" />
+    <result column="PROMOTION" property="promotion" jdbcType="VARCHAR" />
+    <result column="AUDIT_STATUS" property="auditStatus" jdbcType="DECIMAL" />
+    <result column="SHOW_STATUS" property="showStatus" jdbcType="DECIMAL" />
+    <result column="IMGS" property="imgs" jdbcType="VARCHAR" />
+    <result column="KEYWORDS" property="keywords" jdbcType="VARCHAR" />
+    <result column="PAGE_DESC" property="pageDesc" jdbcType="VARCHAR" />
+    <result column="ITEM_RECYCLE" property="itemRecycle" jdbcType="DECIMAL" />
+    <result column="ON_SALE_TIME" property="onSaleTime" jdbcType="TIMESTAMP" />
+    <result column="CHECK_TIME" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CHECK_USER_ID" property="checkUserId" jdbcType="DECIMAL" />
+    <result column="FULL_PATH_DEPLOY" property="fullPathDeploy" jdbcType="VARCHAR" />
+    <result column="FULL_PATH_DEPLOY_OFFER" property="fullPathDeployOffer" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_ITEM_ID" property="originalItemId" jdbcType="DECIMAL" />
+    <result column="LAST_STATUS" property="lastStatus" jdbcType="DECIMAL" />
+    <result column="MERCHANT_ID" property="merchantId" jdbcType="DECIMAL" />
+    <result column="ITEM_SORT" property="itemSort" jdbcType="DECIMAL" />
+    <result column="SALES" property="sales" jdbcType="DECIMAL" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="DECIMAL" />
+    <result column="SIM_LEVEL" property="simLevel" jdbcType="DECIMAL" />
+    <result column="TAG_IMG" property="tagImg" jdbcType="VARCHAR" />
+    </association>
+    <collection property="specList" ofType="com.rl.ecps.model.EbSpecValue">
+       <id column="SPEC_ID" property="specId" jdbcType="DECIMAL" />
+       <result column="SKU_ID" property="skuId" jdbcType="DECIMAL" />
+       <result column="FEATURE_ID" property="featureId" jdbcType="DECIMAL" />
+       <result column="SPEC_VALUE" property="specValue" jdbcType="VARCHAR" />
+    </collection>
+   </resultMap>
+   
+  <select id="getSkuDetailById" parameterType="java.lang.Long" resultMap="getSkuDetailByIdRM">
+   select * from 
+ eb_sku es,eb_item ei,eb_spec_value sv
+ where es.item_id=ei.item_id
+ and es.sku_id=sv.sku_id(+)
+ and es.sku_id=#{skuId}
+   
+  </select>
+  
+  <update id="updateStock" parameterType="map">
+    update eb_sku t set t.stock_inventory = t.stock_inventory-#{quantity} 
+    where t.sku_id =#{skuId} and t.stock_inventory >=#{quantity}
+  </update>
+</mapper>

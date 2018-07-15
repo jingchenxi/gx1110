@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rl.ecps.dao.EbShipAddrMapper" >
+  <resultMap id="BaseResultMap" type="com.rl.ecps.model.EbShipAddr" >
+    <result column="SHIP_ADDR_ID" property="shipAddrId" jdbcType="DECIMAL" />
+    <result column="PTL_USER_ID" property="ptlUserId" jdbcType="DECIMAL" />
+    <result column="SHIP_NAME" property="shipName" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="ZIP_CODE" property="zipCode" jdbcType="VARCHAR" />
+    <result column="ADDR" property="addr" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="DEFAULT_ADDR" property="defaultAddr" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SHIP_ADDR_ID, PTL_USER_ID, SHIP_NAME, PROVINCE, CITY, DISTRICT, ZIP_CODE, ADDR, PHONE, 
+    DEFAULT_ADDR
+  </sql>
+    
+  <insert id="insert" parameterType="com.rl.ecps.model.EbShipAddr" >
+    insert into EB_SHIP_ADDR (SHIP_ADDR_ID, PTL_USER_ID, SHIP_NAME, 
+      PROVINCE, CITY, DISTRICT, 
+      ZIP_CODE, ADDR, PHONE, 
+      DEFAULT_ADDR)
+    values (EB_SHIP_ADDR_SEQ.nextval, #{ptlUserId,jdbcType=DECIMAL}, #{shipName,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{defaultAddr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.ecps.model.EbShipAddr" >
+    insert into EB_SHIP_ADDR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shipAddrId != null" >
+        SHIP_ADDR_ID,
+      </if>
+      <if test="ptlUserId != null" >
+        PTL_USER_ID,
+      </if>
+      <if test="shipName != null" >
+        SHIP_NAME,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="zipCode != null" >
+        ZIP_CODE,
+      </if>
+      <if test="addr != null" >
+        ADDR,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="defaultAddr != null" >
+        DEFAULT_ADDR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shipAddrId != null" >
+        #{shipAddrId,jdbcType=DECIMAL},
+      </if>
+      <if test="ptlUserId != null" >
+        #{ptlUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="shipName != null" >
+        #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddr != null" >
+        #{defaultAddr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByExampleSelective" parameterType="map" >
+    update EB_SHIP_ADDR
+    <set >
+      <if test="shipAddrId != null" >
+        SHIP_ADDR_ID = #{shipAddrId,jdbcType=DECIMAL},
+      </if>
+      <if test="ptlUserId != null" >
+        PTL_USER_ID = #{ptlUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="shipName != null" >
+        SHIP_NAME = #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddr != null" >
+        DEFAULT_ADDR = #{defaultAddr,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="map" >
+    update EB_SHIP_ADDR
+    <set>      
+      <if test="ptlUserId != null" >
+        PTL_USER_ID = #{ptlUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="shipName != null" >
+        SHIP_NAME = #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultAddr != null" >
+        DEFAULT_ADDR = #{defaultAddr,jdbcType=DECIMAL},
+      </if>
+    </set>
+   <where>
+       SHIP_ADDR_ID = #{shipAddrId,jdbcType=DECIMAL}
+   </where>
+  </update>
+  
+  <update id="updateByExample" parameterType="map" >
+    update EB_SHIP_ADDR
+    set SHIP_ADDR_ID = #{shipAddrId,jdbcType=DECIMAL},
+      PTL_USER_ID = #{ptlUserId,jdbcType=DECIMAL},
+      SHIP_NAME = #{shipName,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      ADDR = #{addr,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      DEFAULT_ADDR = #{defaultAddr,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <select id="selectAddrByUserId" parameterType="long" resultMap="BaseResultMap">
+    select * from EB_SHIP_ADDR t where t.PTL_USER_ID = #{userId}
+  </select>
+  
+  <select id="selectShipAddrById" parameterType="java.lang.Long" resultMap="BaseResultMap"> 
+    select * from EB_SHIP_ADDR where SHIP_ADDR_ID = #{shipAddrId,jdbcType=DECIMAL}
+  </select>
+  
+  <update id="destoryDefault" parameterType="long">
+    update EB_SHIP_ADDR t set t.DEFAULT_ADDR = 0
+    where t.DEFAULT_ADDR = 1 and t.PTL_USER_ID = #{userId}
+  </update>
+  
+  <delete id="deleteAddrByPrimaryKey" parameterType="long">
+    delete from EB_SHIP_ADDR where SHIP_ADDR_ID = #{shipAddrId}
+  </delete>
+  
+</mapper>

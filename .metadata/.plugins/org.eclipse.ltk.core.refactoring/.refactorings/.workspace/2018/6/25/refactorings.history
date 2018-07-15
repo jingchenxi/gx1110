@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete 4 resources" deleteContents="false" description="Delete 4 resources" element1="/ecps-console" element2="/ecps-core" element3="/ecps-file" element4="/ecps-portal" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="4" stamp="1529303123337"/>&#x0A;<refactoring comment="Delete 3 resources" deleteContents="false" description="Delete 3 resources" element1="/ecps-core" element2="/ecps-file" element3="/ecps-portal" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="3" stamp="1529303197675"/>
+</session>

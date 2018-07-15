@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecps.dao.EbOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.rl.ecps.model.EbOrder" >
+    <id column="ORDER_ID" property="orderId" jdbcType="DECIMAL" />
+    <result column="PTL_USER_ID" property="ptlUserId" jdbcType="DECIMAL" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="VARCHAR" />
+    <result column="PAYMENT" property="payment" jdbcType="DECIMAL" />
+    <result column="PAY_PLATFORM" property="payPlatform" jdbcType="DECIMAL" />
+    <result column="DELIVERY" property="delivery" jdbcType="DECIMAL" />
+    <result column="IS_CONFIRM" property="isConfirm" jdbcType="DECIMAL" />
+    <result column="ORDER_SUM" property="orderSum" jdbcType="DECIMAL" />
+    <result column="SHIP_FEE" property="shipFee" jdbcType="DECIMAL" />
+    <result column="IS_PAID" property="isPaid" jdbcType="DECIMAL" />
+    <result column="ORDER_STATE" property="orderState" jdbcType="DECIMAL" />
+    <result column="PAYMENT_CASH" property="paymentCash" jdbcType="DECIMAL" />
+    <result column="DISTRI_ID" property="distriId" jdbcType="DECIMAL" />
+    <result column="DELIVERY_METHOD" property="deliveryMethod" jdbcType="DECIMAL" />
+    <result column="PAYMENT_NO" property="paymentNo" jdbcType="VARCHAR" />
+    <result column="ORDER_TIME" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="DEPOSIT_TIME" property="depositTime" jdbcType="TIMESTAMP" />
+    <result column="SUCCESS_TIME" property="successTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="SRV_TYPE" property="srvType" jdbcType="DECIMAL" />
+    <result column="SELF_COLLECT_SITE" property="selfCollectSite" jdbcType="VARCHAR" />
+    <result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
+    <result column="IS_DISPLAY" property="isDisplay" jdbcType="DECIMAL" />
+    <result column="NOTES" property="notes" jdbcType="VARCHAR" />
+    <result column="SHIP_NAME" property="shipName" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="ZIP_CODE" property="zipCode" jdbcType="VARCHAR" />
+    <result column="ADDR" property="addr" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="PAYABLE" property="payable" jdbcType="DECIMAL" />
+    <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+    <result column="CONTENTS" property="contents" jdbcType="DECIMAL" />
+    <result column="IS_CALL" property="isCall" jdbcType="DECIMAL" />
+    <result column="DELIVERY_NO" property="deliveryNo" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+    <result column="IS_PRINT" property="isPrint" jdbcType="DECIMAL" />
+    <result column="CRM_CALLS_TIME" property="crmCallsTime" jdbcType="TIMESTAMP" />
+    <result column="IS_OFFER_RELEASE" property="isOfferRelease" jdbcType="DECIMAL" />
+    <result column="JOB_NUM" property="jobNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ORDER_ID, PTL_USER_ID, USERNAME, ORDER_NUM, PAYMENT, PAY_PLATFORM, DELIVERY, IS_CONFIRM, 
+    ORDER_SUM, SHIP_FEE, IS_PAID, ORDER_STATE, PAYMENT_CASH, DISTRI_ID, DELIVERY_METHOD, 
+    PAYMENT_NO, ORDER_TIME, PAY_TIME, DEPOSIT_TIME, SUCCESS_TIME, UPDATE_TIME, SRV_TYPE, 
+    SELF_COLLECT_SITE, IS_DELETED, IS_DISPLAY, NOTES, SHIP_NAME, PROVINCE, CITY, DISTRICT, 
+    ZIP_CODE, ADDR, PHONE, PAYABLE, COMPANY, CONTENTS, IS_CALL, DELIVERY_NO, AREA_CODE, 
+    AREA_NAME, IS_PRINT, CRM_CALLS_TIME, IS_OFFER_RELEASE, JOB_NUM
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from EB_ORDER
+    where ORDER_ID = #{orderId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from EB_ORDER
+    where ORDER_ID = #{orderId,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.rl.ecps.model.EbOrder" >
+     <selectKey keyProperty="orderId" order="BEFORE" resultType="long">
+       select eb_order_seq.nextval from dual
+     </selectKey>
+    insert into EB_ORDER (ORDER_ID, PTL_USER_ID, USERNAME, 
+      ORDER_NUM, PAYMENT, PAY_PLATFORM, 
+      DELIVERY, IS_CONFIRM, ORDER_SUM, 
+      SHIP_FEE, IS_PAID, ORDER_STATE, 
+      PAYMENT_CASH, DISTRI_ID, DELIVERY_METHOD, 
+      PAYMENT_NO, ORDER_TIME, PAY_TIME, 
+      DEPOSIT_TIME, SUCCESS_TIME, UPDATE_TIME, 
+      SRV_TYPE, SELF_COLLECT_SITE, IS_DELETED, 
+      IS_DISPLAY, NOTES, SHIP_NAME, 
+      PROVINCE, CITY, DISTRICT, 
+      ZIP_CODE, ADDR, PHONE, 
+      PAYABLE, COMPANY, CONTENTS, 
+      IS_CALL, DELIVERY_NO, AREA_CODE, 
+      AREA_NAME, IS_PRINT, CRM_CALLS_TIME, 
+      IS_OFFER_RELEASE, JOB_NUM)
+    values (#{orderId,jdbcType=DECIMAL}, #{ptlUserId,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=VARCHAR}, #{payment,jdbcType=DECIMAL}, #{payPlatform,jdbcType=DECIMAL}, 
+      #{delivery,jdbcType=DECIMAL}, #{isConfirm,jdbcType=DECIMAL}, #{orderSum,jdbcType=DECIMAL}, 
+      #{shipFee,jdbcType=DECIMAL},0, #{orderState,jdbcType=DECIMAL}, 
+      #{paymentCash,jdbcType=DECIMAL}, #{distriId,jdbcType=DECIMAL}, #{deliveryMethod,jdbcType=DECIMAL}, 
+      #{paymentNo,jdbcType=VARCHAR}, sysdate, #{payTime,jdbcType=TIMESTAMP}, 
+      #{depositTime,jdbcType=TIMESTAMP}, #{successTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{srvType,jdbcType=DECIMAL}, #{selfCollectSite,jdbcType=VARCHAR}, #{isDeleted,jdbcType=DECIMAL}, 
+      #{isDisplay,jdbcType=DECIMAL}, #{notes,jdbcType=VARCHAR}, #{shipName,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{payable,jdbcType=DECIMAL}, #{company,jdbcType=VARCHAR}, #{contents,jdbcType=DECIMAL}, 
+      0, #{deliveryNo,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{isPrint,jdbcType=DECIMAL}, #{crmCallsTime,jdbcType=TIMESTAMP}, 
+      #{isOfferRelease,jdbcType=DECIMAL}, #{jobNum,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.rl.ecps.model.EbOrder" >
+    insert into EB_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="ptlUserId != null" >
+        PTL_USER_ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="payment != null" >
+        PAYMENT,
+      </if>
+      <if test="payPlatform != null" >
+        PAY_PLATFORM,
+      </if>
+      <if test="delivery != null" >
+        DELIVERY,
+      </if>
+      <if test="isConfirm != null" >
+        IS_CONFIRM,
+      </if>
+      <if test="orderSum != null" >
+        ORDER_SUM,
+      </if>
+      <if test="shipFee != null" >
+        SHIP_FEE,
+      </if>
+      <if test="isPaid != null" >
+        IS_PAID,
+      </if>
+      <if test="orderState != null" >
+        ORDER_STATE,
+      </if>
+      <if test="paymentCash != null" >
+        PAYMENT_CASH,
+      </if>
+      <if test="distriId != null" >
+        DISTRI_ID,
+      </if>
+      <if test="deliveryMethod != null" >
+        DELIVERY_METHOD,
+      </if>
+      <if test="paymentNo != null" >
+        PAYMENT_NO,
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME,
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
+      <if test="depositTime != null" >
+        DEPOSIT_TIME,
+      </if>
+      <if test="successTime != null" >
+        SUCCESS_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="srvType != null" >
+        SRV_TYPE,
+      </if>
+      <if test="selfCollectSite != null" >
+        SELF_COLLECT_SITE,
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED,
+      </if>
+      <if test="isDisplay != null" >
+        IS_DISPLAY,
+      </if>
+      <if test="notes != null" >
+        NOTES,
+      </if>
+      <if test="shipName != null" >
+        SHIP_NAME,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="zipCode != null" >
+        ZIP_CODE,
+      </if>
+      <if test="addr != null" >
+        ADDR,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="payable != null" >
+        PAYABLE,
+      </if>
+      <if test="company != null" >
+        COMPANY,
+      </if>
+      <if test="contents != null" >
+        CONTENTS,
+      </if>
+      <if test="isCall != null" >
+        IS_CALL,
+      </if>
+      <if test="deliveryNo != null" >
+        DELIVERY_NO,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME,
+      </if>
+      <if test="isPrint != null" >
+        IS_PRINT,
+      </if>
+      <if test="crmCallsTime != null" >
+        CRM_CALLS_TIME,
+      </if>
+      <if test="isOfferRelease != null" >
+        IS_OFFER_RELEASE,
+      </if>
+      <if test="jobNum != null" >
+        JOB_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="ptlUserId != null" >
+        #{ptlUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="payPlatform != null" >
+        #{payPlatform,jdbcType=DECIMAL},
+      </if>
+      <if test="delivery != null" >
+        #{delivery,jdbcType=DECIMAL},
+      </if>
+      <if test="isConfirm != null" >
+        #{isConfirm,jdbcType=DECIMAL},
+      </if>
+      <if test="orderSum != null" >
+        #{orderSum,jdbcType=DECIMAL},
+      </if>
+      <if test="shipFee != null" >
+        #{shipFee,jdbcType=DECIMAL},
+      </if>
+      <if test="isPaid != null" >
+        #{isPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentCash != null" >
+        #{paymentCash,jdbcType=DECIMAL},
+      </if>
+      <if test="distriId != null" >
+        #{distriId,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryMethod != null" >
+        #{deliveryMethod,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentNo != null" >
+        #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depositTime != null" >
+        #{depositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successTime != null" >
+        #{successTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="srvType != null" >
+        #{srvType,jdbcType=DECIMAL},
+      </if>
+      <if test="selfCollectSite != null" >
+        #{selfCollectSite,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=DECIMAL},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="shipName != null" >
+        #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="payable != null" >
+        #{payable,jdbcType=DECIMAL},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null" >
+        #{contents,jdbcType=DECIMAL},
+      </if>
+      <if test="isCall != null" >
+        #{isCall,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryNo != null" >
+        #{deliveryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrint != null" >
+        #{isPrint,jdbcType=DECIMAL},
+      </if>
+      <if test="crmCallsTime != null" >
+        #{crmCallsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isOfferRelease != null" >
+        #{isOfferRelease,jdbcType=DECIMAL},
+      </if>
+      <if test="jobNum != null" >
+        #{jobNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update EB_ORDER
+    <set >
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ptlUserId != null" >
+        PTL_USER_ID = #{record.ptlUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null" >
+        ORDER_NUM = #{record.orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payment != null" >
+        PAYMENT = #{record.payment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payPlatform != null" >
+        PAY_PLATFORM = #{record.payPlatform,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delivery != null" >
+        DELIVERY = #{record.delivery,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isConfirm != null" >
+        IS_CONFIRM = #{record.isConfirm,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderSum != null" >
+        ORDER_SUM = #{record.orderSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shipFee != null" >
+        SHIP_FEE = #{record.shipFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isPaid != null" >
+        IS_PAID = #{record.isPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderState != null" >
+        ORDER_STATE = #{record.orderState,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymentCash != null" >
+        PAYMENT_CASH = #{record.paymentCash,jdbcType=DECIMAL},
+      </if>
+      <if test="record.distriId != null" >
+        DISTRI_ID = #{record.distriId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deliveryMethod != null" >
+        DELIVERY_METHOD = #{record.deliveryMethod,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymentNo != null" >
+        PAYMENT_NO = #{record.paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTime != null" >
+        ORDER_TIME = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payTime != null" >
+        PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.depositTime != null" >
+        DEPOSIT_TIME = #{record.depositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.successTime != null" >
+        SUCCESS_TIME = #{record.successTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.srvType != null" >
+        SRV_TYPE = #{record.srvType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.selfCollectSite != null" >
+        SELF_COLLECT_SITE = #{record.selfCollectSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null" >
+        IS_DELETED = #{record.isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isDisplay != null" >
+        IS_DISPLAY = #{record.isDisplay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.notes != null" >
+        NOTES = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipName != null" >
+        SHIP_NAME = #{record.shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipCode != null" >
+        ZIP_CODE = #{record.zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addr != null" >
+        ADDR = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payable != null" >
+        PAYABLE = #{record.payable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.company != null" >
+        COMPANY = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contents != null" >
+        CONTENTS = #{record.contents,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isCall != null" >
+        IS_CALL = #{record.isCall,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deliveryNo != null" >
+        DELIVERY_NO = #{record.deliveryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode != null" >
+        AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null" >
+        AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPrint != null" >
+        IS_PRINT = #{record.isPrint,jdbcType=DECIMAL},
+      </if>
+      <if test="record.crmCallsTime != null" >
+        CRM_CALLS_TIME = #{record.crmCallsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isOfferRelease != null" >
+        IS_OFFER_RELEASE = #{record.isOfferRelease,jdbcType=DECIMAL},
+      </if>
+      <if test="record.jobNum != null" >
+        JOB_NUM = #{record.jobNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update EB_ORDER
+    set ORDER_ID = #{record.orderId,jdbcType=DECIMAL},
+      PTL_USER_ID = #{record.ptlUserId,jdbcType=DECIMAL},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      ORDER_NUM = #{record.orderNum,jdbcType=VARCHAR},
+      PAYMENT = #{record.payment,jdbcType=DECIMAL},
+      PAY_PLATFORM = #{record.payPlatform,jdbcType=DECIMAL},
+      DELIVERY = #{record.delivery,jdbcType=DECIMAL},
+      IS_CONFIRM = #{record.isConfirm,jdbcType=DECIMAL},
+      ORDER_SUM = #{record.orderSum,jdbcType=DECIMAL},
+      SHIP_FEE = #{record.shipFee,jdbcType=DECIMAL},
+      IS_PAID = #{record.isPaid,jdbcType=DECIMAL},
+      ORDER_STATE = #{record.orderState,jdbcType=DECIMAL},
+      PAYMENT_CASH = #{record.paymentCash,jdbcType=DECIMAL},
+      DISTRI_ID = #{record.distriId,jdbcType=DECIMAL},
+      DELIVERY_METHOD = #{record.deliveryMethod,jdbcType=DECIMAL},
+      PAYMENT_NO = #{record.paymentNo,jdbcType=VARCHAR},
+      ORDER_TIME = #{record.orderTime,jdbcType=TIMESTAMP},
+      PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      DEPOSIT_TIME = #{record.depositTime,jdbcType=TIMESTAMP},
+      SUCCESS_TIME = #{record.successTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      SRV_TYPE = #{record.srvType,jdbcType=DECIMAL},
+      SELF_COLLECT_SITE = #{record.selfCollectSite,jdbcType=VARCHAR},
+      IS_DELETED = #{record.isDeleted,jdbcType=DECIMAL},
+      IS_DISPLAY = #{record.isDisplay,jdbcType=DECIMAL},
+      NOTES = #{record.notes,jdbcType=VARCHAR},
+      SHIP_NAME = #{record.shipName,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      ZIP_CODE = #{record.zipCode,jdbcType=VARCHAR},
+      ADDR = #{record.addr,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      PAYABLE = #{record.payable,jdbcType=DECIMAL},
+      COMPANY = #{record.company,jdbcType=VARCHAR},
+      CONTENTS = #{record.contents,jdbcType=DECIMAL},
+      IS_CALL = #{record.isCall,jdbcType=DECIMAL},
+      DELIVERY_NO = #{record.deliveryNo,jdbcType=VARCHAR},
+      AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      IS_PRINT = #{record.isPrint,jdbcType=DECIMAL},
+      CRM_CALLS_TIME = #{record.crmCallsTime,jdbcType=TIMESTAMP},
+      IS_OFFER_RELEASE = #{record.isOfferRelease,jdbcType=DECIMAL},
+      JOB_NUM = #{record.jobNum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.rl.ecps.model.EbOrder" >
+    update EB_ORDER
+    <set >
+      <if test="ptlUserId != null" >
+        PTL_USER_ID = #{ptlUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        PAYMENT = #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="payPlatform != null" >
+        PAY_PLATFORM = #{payPlatform,jdbcType=DECIMAL},
+      </if>
+      <if test="delivery != null" >
+        DELIVERY = #{delivery,jdbcType=DECIMAL},
+      </if>
+      <if test="isConfirm != null" >
+        IS_CONFIRM = #{isConfirm,jdbcType=DECIMAL},
+      </if>
+      <if test="orderSum != null" >
+        ORDER_SUM = #{orderSum,jdbcType=DECIMAL},
+      </if>
+      <if test="shipFee != null" >
+        SHIP_FEE = #{shipFee,jdbcType=DECIMAL},
+      </if>
+      <if test="isPaid != null" >
+        IS_PAID = #{isPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="orderState != null" >
+        ORDER_STATE = #{orderState,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentCash != null" >
+        PAYMENT_CASH = #{paymentCash,jdbcType=DECIMAL},
+      </if>
+      <if test="distriId != null" >
+        DISTRI_ID = #{distriId,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryMethod != null" >
+        DELIVERY_METHOD = #{deliveryMethod,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentNo != null" >
+        PAYMENT_NO = #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depositTime != null" >
+        DEPOSIT_TIME = #{depositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successTime != null" >
+        SUCCESS_TIME = #{successTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="srvType != null" >
+        SRV_TYPE = #{srvType,jdbcType=DECIMAL},
+      </if>
+      <if test="selfCollectSite != null" >
+        SELF_COLLECT_SITE = #{selfCollectSite,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="isDisplay != null" >
+        IS_DISPLAY = #{isDisplay,jdbcType=DECIMAL},
+      </if>
+      <if test="notes != null" >
+        NOTES = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="shipName != null" >
+        SHIP_NAME = #{shipName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="payable != null" >
+        PAYABLE = #{payable,jdbcType=DECIMAL},
+      </if>
+      <if test="company != null" >
+        COMPANY = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="contents != null" >
+        CONTENTS = #{contents,jdbcType=DECIMAL},
+      </if>
+      <if test="isCall != null" >
+        IS_CALL = #{isCall,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryNo != null" >
+        DELIVERY_NO = #{deliveryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrint != null" >
+        IS_PRINT = #{isPrint,jdbcType=DECIMAL},
+      </if>
+      <if test="crmCallsTime != null" >
+        CRM_CALLS_TIME = #{crmCallsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isOfferRelease != null" >
+        IS_OFFER_RELEASE = #{isOfferRelease,jdbcType=DECIMAL},
+      </if>
+      <if test="jobNum != null" >
+        JOB_NUM = #{jobNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.rl.ecps.model.EbOrder" >
+    update EB_ORDER
+    set PTL_USER_ID = #{ptlUserId,jdbcType=DECIMAL},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+      PAYMENT = #{payment,jdbcType=DECIMAL},
+      PAY_PLATFORM = #{payPlatform,jdbcType=DECIMAL},
+      DELIVERY = #{delivery,jdbcType=DECIMAL},
+      IS_CONFIRM = #{isConfirm,jdbcType=DECIMAL},
+      ORDER_SUM = #{orderSum,jdbcType=DECIMAL},
+      SHIP_FEE = #{shipFee,jdbcType=DECIMAL},
+      IS_PAID = #{isPaid,jdbcType=DECIMAL},
+      ORDER_STATE = #{orderState,jdbcType=DECIMAL},
+      PAYMENT_CASH = #{paymentCash,jdbcType=DECIMAL},
+      DISTRI_ID = #{distriId,jdbcType=DECIMAL},
+      DELIVERY_METHOD = #{deliveryMethod,jdbcType=DECIMAL},
+      PAYMENT_NO = #{paymentNo,jdbcType=VARCHAR},
+      ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      DEPOSIT_TIME = #{depositTime,jdbcType=TIMESTAMP},
+      SUCCESS_TIME = #{successTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SRV_TYPE = #{srvType,jdbcType=DECIMAL},
+      SELF_COLLECT_SITE = #{selfCollectSite,jdbcType=VARCHAR},
+      IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+      IS_DISPLAY = #{isDisplay,jdbcType=DECIMAL},
+      NOTES = #{notes,jdbcType=VARCHAR},
+      SHIP_NAME = #{shipName,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      ADDR = #{addr,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      PAYABLE = #{payable,jdbcType=DECIMAL},
+      COMPANY = #{company,jdbcType=VARCHAR},
+      CONTENTS = #{contents,jdbcType=DECIMAL},
+      IS_CALL = #{isCall,jdbcType=DECIMAL},
+      DELIVERY_NO = #{deliveryNo,jdbcType=VARCHAR},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      IS_PRINT = #{isPrint,jdbcType=DECIMAL},
+      CRM_CALLS_TIME = #{crmCallsTime,jdbcType=TIMESTAMP},
+      IS_OFFER_RELEASE = #{isOfferRelease,jdbcType=DECIMAL},
+      JOB_NUM = #{jobNum,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <resultMap type="com.rl.ecps.model.EbOrder" id="selectOrderAndDetailByIdRM" extends="BaseResultMap">
+    <collection property="detailList" ofType="com.rl.ecps.model.EbOrderDetail">
+    <id column="ORDER_DETAIL_ID" property="orderDetailId" jdbcType="DECIMAL" />
+    <result column="ORDER_ID" property="orderId" jdbcType="DECIMAL" />
+    <result column="ITEM_ID" property="itemId" jdbcType="DECIMAL" />
+    <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR" />
+    <result column="ITEM_NO" property="itemNo" jdbcType="VARCHAR" />
+    <result column="SKU_ID" property="skuId" jdbcType="DECIMAL" />
+    <result column="SKU" property="sku" jdbcType="VARCHAR" />
+    <result column="SKU_IMG" property="skuImg" jdbcType="VARCHAR" />
+    <result column="SKU_NAME" property="skuName" jdbcType="VARCHAR" />
+    <result column="SKU_CAT_TYPE" property="skuCatType" jdbcType="VARCHAR" />
+    <result column="SKU_SPEC" property="skuSpec" jdbcType="VARCHAR" />
+    <result column="MARKET_PRICE" property="marketPrice" jdbcType="DECIMAL" />
+    <result column="SKU_DISCOUNT" property="skuDiscount" jdbcType="DECIMAL" />
+    <result column="SKU_PRICE" property="skuPrice" jdbcType="DECIMAL" />
+    <result column="OFFER_GROUP_ID" property="offerGroupId" jdbcType="DECIMAL" />
+    <result column="OFFER_GROUP_NAME" property="offerGroupName" jdbcType="VARCHAR" />
+    <result column="OFFER_TYPE" property="offerType" jdbcType="DECIMAL" />
+    <result column="SHORT_NAME" property="shortName" jdbcType="VARCHAR" />
+    <result column="OFFER_ID" property="offerId" jdbcType="DECIMAL" />
+    <result column="OFFER_NAME" property="offerName" jdbcType="VARCHAR" />
+    <result column="OFFER_NO" property="offerNo" jdbcType="VARCHAR" />
+    <result column="SHORT_NAME2" property="shortName2" jdbcType="VARCHAR" />
+    <result column="OFFER_TERM" property="offerTerm" jdbcType="DECIMAL" />
+    <result column="COMMIT_MONTHLY" property="commitMonthly" jdbcType="DECIMAL" />
+    <result column="PREPAID" property="prepaid" jdbcType="DECIMAL" />
+    <result column="REFUND_PREIOD" property="refundPreiod" jdbcType="DECIMAL" />
+    <result column="REFUND_MONTHLY" property="refundMonthly" jdbcType="DECIMAL" />
+    <result column="REFUND_1ST_MONTH" property="refund1stMonth" jdbcType="DECIMAL" />
+    <result column="REFUND_LAST_MONTH" property="refundLastMonth" jdbcType="DECIMAL" />
+    <result column="ORDER_DETAIL_TYPE" property="orderDetailType" jdbcType="DECIMAL" />
+    <result column="MERCHANT_ID" property="merchantId" jdbcType="DECIMAL" />
+    <result column="QUANTITY" property="quantity" jdbcType="DECIMAL" />
+    <result column="PRICE" property="price" jdbcType="DECIMAL" />
+    <result column="SERIESCODE" property="seriescode" jdbcType="VARCHAR" />
+    <result column="OFFER_GROUP_NO" property="offerGroupNo" jdbcType="VARCHAR" />
+    <result column="PROMO_TYPE" property="promoType" jdbcType="DECIMAL" />
+    <result column="COND_ID" property="condId" jdbcType="DECIMAL" />
+    </collection>
+  </resultMap>
+  <select id="selectOrderAndDetailById" parameterType="long" resultMap="selectOrderAndDetailByIdRM">
+    select * 
+    from eb_order eo,eb_order_detail ed 
+    where eo.order_id = ed.order_id
+    and eo.order_id = #{orderId}
+  </select>
+</mapper>

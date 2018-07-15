@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rl.ecps.dao.EbSpecValueMapper" >
+  <resultMap id="BaseResultMap" type="com.rl.ecps.model.EbSpecValue" >
+    <result column="SPEC_ID" property="specId" jdbcType="DECIMAL" />
+    <result column="SKU_ID" property="skuId" jdbcType="DECIMAL" />
+    <result column="FEATURE_ID" property="featureId" jdbcType="DECIMAL" />
+    <result column="SPEC_VALUE" property="specValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SPEC_ID, SKU_ID, FEATURE_ID, SPEC_VALUE
+  </sql>
+  
+  
+  <insert id="insert" parameterType="com.rl.ecps.model.EbSpecValue" >
+    insert into EB_SPEC_VALUE (SPEC_ID, SKU_ID, FEATURE_ID, 
+      SPEC_VALUE)
+    values (EB_SPEC_VALUE_SEQ.nextval, #{skuId,jdbcType=DECIMAL}, #{featureId,jdbcType=DECIMAL}, 
+      #{specValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rl.ecps.model.EbSpecValue" >
+    insert into EB_SPEC_VALUE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specId != null" >
+        SPEC_ID,
+      </if>
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="featureId != null" >
+        FEATURE_ID,
+      </if>
+      <if test="specValue != null" >
+        SPEC_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specId != null" >
+        #{specId,jdbcType=DECIMAL},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=DECIMAL},
+      </if>
+      <if test="featureId != null" >
+        #{featureId,jdbcType=DECIMAL},
+      </if>
+      <if test="specValue != null" >
+        #{specValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByExampleSelective" parameterType="map" >
+    update EB_SPEC_VALUE
+    <set >
+      <if test="record.specId != null" >
+        SPEC_ID = #{record.specId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.skuId != null" >
+        SKU_ID = #{record.skuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.featureId != null" >
+        FEATURE_ID = #{record.featureId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.specValue != null" >
+        SPEC_VALUE = #{record.specValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update EB_SPEC_VALUE
+    set SPEC_ID = #{record.specId,jdbcType=DECIMAL},
+      SKU_ID = #{record.skuId,jdbcType=DECIMAL},
+      FEATURE_ID = #{record.featureId,jdbcType=DECIMAL},
+      SPEC_VALUE = #{record.specValue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
